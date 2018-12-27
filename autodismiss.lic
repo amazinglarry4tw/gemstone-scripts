@@ -1,8 +1,0 @@
-loop{
-	GameObj.npcs.each{ |monster|
-			if monster.status =~ /dead/ 
-				fput "dismiss #{monster.noun}"
-	end
-	   }
-	   sleep 0.1
-	}
