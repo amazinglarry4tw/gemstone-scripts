@@ -1,0 +1,11 @@
+@minutes = variable[1].to_i
+echo "Exiting in " + @minutes.to_s + " minutes."
+
+def do_math
+	@duration = @minutes * 60
+end
+
+do_math
+sleep(@duration)
+echo @minutes.to_s + " minutes have elapsed.  Exiting."
+fput "exit"

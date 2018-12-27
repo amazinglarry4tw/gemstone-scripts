@@ -1,0 +1,31 @@
+##quiet
+## vim: set ft=ruby:
+=begin
+
+    SpiffyLooter by SpiffyJr (spiffyjr@gmail.com)
+    
+    todo: add auto-looting
+    
+     author: spiffyjr
+      email: theman@spiffyjr.me
+       name: SpiffyLoot
+       tags: loot
+    version: 1.0
+
+=end
+
+players = GameObj.pcs
+lefthand = GameObj.left_hand
+
+if lefthand.name = 'Empty'
+lefthand = "You got nothin."
+end
+
+echo "Here are the players:"
+echo players
+
+echo "Here is what is in your left hand:"
+echo lefthand
+
+echo Spell[414].known?
+

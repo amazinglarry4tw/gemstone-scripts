@@ -1,0 +1,4 @@
+room = (GameObj.room_desc.to_a + GameObj.loot.to_a)
+
+echo GameObj.room.id
+echo room

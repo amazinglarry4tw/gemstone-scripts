@@ -1,0 +1,6 @@
+check_health = proc{
+  echo 'I am supposed to be checking my health.'
+  if checkhealth < 60
+    echo 'I am below 60 hit points.'
+  end
+}

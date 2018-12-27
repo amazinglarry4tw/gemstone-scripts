@@ -1,0 +1,17 @@
+@fragrance = variable[1]
+@found_fragrance = false
+
+def analyze_vial
+	fput "glance"
+	
+	unless @fragrance.nil?
+		match = matchtimeout 1, @fragrance
+		
+		if match != false
+			@found_fragrance = true
+		end
+	end
+end
+
+analyze_vial
+echo @found_fragrance

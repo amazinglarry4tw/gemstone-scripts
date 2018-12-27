@@ -1,0 +1,47 @@
+@found_rest = false
+@index = 0
+@rooms = { "Scuttlebug" => 17600, "Waterhole" => 12364, "Town" => 3668 }
+@room_keys = @rooms.keys
+
+def go2 (room_number)
+	start_script('go2', [room_number])
+	wait_while{running?('go2')}
+end
+
+def go_table
+	fput "go table"
+	msg = matchtimeout 2, "You head over to the",  "You and your group head over"
+	
+	if (msg.include? "You head over to the") || (msg.include? "You and your group head over")
+		@found_rest = true
+		echo "We found a table."
+	end
+end
+
+def reset_index
+	@index = 0
+end
+
+begin 
+	room = @room_keys[@index].to_s
+	
+	case room 
+		when "Scuttlebug"
+			go2(@rooms["Scuttlebug"])
+			go_table
+		when "Waterhole"
+			go2(@rooms["Waterhole"])
+			go_table
+		when "Town"
+			go2(@rooms["Town"])
+			@found_rest = true
+			echo "We had to settle for Town"
+	end
+	
+	@index += 1
+	
+	if @index > @rooms.length
+		reset_index
+	end
+	
+end until @found_rest

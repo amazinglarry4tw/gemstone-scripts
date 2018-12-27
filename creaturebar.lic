@@ -1,0 +1,168 @@
+class CreatureInfo
+	def initialize(name, level)
+		@creature_name = name
+		@creature_level = level
+	end
+end
+
+$creatures = [CreatureInfo.new("greater krynch", 84), CreatureInfo.new("earth elemental", 82), CreatureInfo.new("kobold", 1)]
+
+puts("<closeDialog id='Creatures'/><openDialog type='dynamic' id='Creatures' title='Creatures' target='Creatures' location='main' height='150' resident='true'><dialogData id='Creatures'></dialogData></openDialog>")
+
+current_npcs = GameObj.npcs
+render = false
+update = false
+
+render = proc {
+	finalstring = "<dialogData id='Creatures' clear='t'>"
+	finalstring += "<label id = 'title', value = 'Creatures In Da Room', justify='1' anchor_top='top' top='0' left='1' width='189'/>"
+	previous_id = nil
+	label_id = 0
+	echo $creatures.empty?
+	
+	GameObj.npcs.each do |name| 
+		label_id += 1
+		creaturename = nil
+
+		$creatures.each do |creature|
+			if (creature.name == name.name)
+				creaturename = "(#{creature.level})"
+			end
+		end
+		
+		if (name.status == nil)
+			creaturename = "#{name.name}"
+		else
+			creaturename = "#{name.name} (#{name.status})"
+		end
+		
+		if previous_id == nil 
+			finalstring += "<label id = '#{label_id}', value = '#{creaturename}', justify='4' anchor_top='title' top='0' left='1' height='nil' width='nil'/>"
+			previous_id = label_id
+		else
+			finalstring += "<label id = '#{label_id}', value = '#{creaturename}', justify='4' anchor_top='#{previous_id}' top='0' left='1' height='nil' width='nil'/>"
+			previous_id = label_id
+
+		end
+	end	
+	finalstring += "</dialogData>"
+	puts(finalstring)
+}
+
+render_by_length = proc {
+	finalstring = "<dialogData id='Creatures' clear='t'>"
+	finalstring += "<label id = 'title', value = 'Creatures In Room', justify='1' anchor_top='top' top='0' left='1' width='189'/>"
+	previous_id = nil
+	label_id = 0
+	
+	sorted_name = Array.new
+	current_npcs = current_npcs.sort_by {|x| x.name.length}
+	
+		current_npcs.each do |name| 
+		label_id += 1
+		creaturename = nil
+		if (name.status == nil)
+			creaturename = "#{name.name}"
+		else
+			creaturename = "#{name.name} (#{name.status})"
+		end
+		
+		if previous_id == nil 
+			finalstring += "<label id = '#{label_id}', value = '#{creaturename}', justify='4' anchor_top='title' top='0' left='1' height='nil' width='nil'/>"
+			previous_id = label_id
+		else
+			finalstring += "<label id = '#{label_id}', value = '#{creaturename}', justify='4' anchor_top='#{previous_id}' top='0' left='1' height='nil' width='nil'/>"
+			previous_id = label_id
+		end
+	end	
+	finalstring += "</dialogData>"
+	puts(finalstring)
+}
+
+render_by_alphabetical = proc {
+	finalstring = "<dialogData id='Creatures' clear='t'>"
+	finalstring += "<label id = 'title', value = 'Creatures In Room', justify='1' anchor_top='top' top='0' left='1' width='189'/>"
+	previous_id = nil
+	label_id = 0
+	
+	sorted_name = Array.new
+	current_npcs = current_npcs.sort_by {|x| x.name.downcase}
+	
+		current_npcs.each do |name| 
+		label_id += 1
+		creaturename = nil
+	
+		$creatures.each do |creature|
+			if (creature.instance_variable_get(:@creature_name) == name.name)
+				creaturename = "(#{creature.instance_variable_get(:@creature_level)})" + " " 
+				echo creaturename
+			end
+		end
+		
+		if (name.status == nil)
+			creaturename += "#{name.name}"
+		else
+			creaturename += "#{name.name} (#{name.status})"
+		end
+		
+		if previous_id == nil 
+			finalstring += "<label id = '#{label_id}', value = '#{creaturename}', justify='4' anchor_top='title' top='0' left='1' height='nil' width='nil'/>"
+			previous_id = label_id
+		else
+			finalstring += "<label id = '#{label_id}', value = '#{creaturename}', justify='4' anchor_top='#{previous_id}' top='0' left='1' height='nil' width='nil'/>"
+			previous_id = label_id
+		end
+	end	
+	finalstring += "</dialogData>"
+	puts(finalstring)
+}
+
+update_npcs = proc {
+	updated_npcs = GameObj.npcs
+
+	if (!update)
+		echo 'Update is false'
+		render = false
+		next
+	else
+		echo 'We shoul update, and set render true.'
+		current_npcs = updated_npcs
+		render = true
+	end
+}
+
+check_npcs = proc {
+	updated_npcs = GameObj.npcs
+	
+	if (updated_npcs != current_npcs)
+		update = true
+	end
+}
+
+check_npcs_status = proc {
+	counter = 1
+
+	GameObj.npcs.each do |npc|
+		if (current_npcs[counter].status != npc.status)
+			update = true
+		end
+		counter += 1
+	end
+}
+
+update_npcs = proc {
+	current_npcs = GameObj.npcs
+}
+
+loop {	
+	check_npcs.call
+	check_npcs_status.call
+	
+	if (update)
+		update_npcs.call
+		render_by_alphabetical.call
+		update = false
+	end
+	
+	sleep 1
+}

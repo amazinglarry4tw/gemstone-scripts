@@ -1,0 +1,17 @@
+
+
+
+
+target = script.vars.shift
+fput "appraise #{target}"
+wound_line = waitfor("You take a quick appraisal of", "Appraise what?", "Wouldn't it be easier")
+
+if wound_line =~ /You take a quick appraisal of (\w+)/ then target = $1.dup
+else next end
+if wound_line.include?(',')
+	wound_array = wound_line.split(/You take a quick appraisal of|,/)
+else
+	wound_array = wound_line.scan(/a (?:blinded|swollen|bruised) (?:left|right) eye|deep lacerations across (?:his|her) \w+|deep gashes and serious bleeding (?:on|from|across) (?:his|her) \w+|minor cuts and bruises on (?:his|her) (?:left|right) (?:hand|arm|leg)|a (?:fractured and bleeding|completely severed) (?:left|right) (?:hand|arm|leg)|moderate bleeding from (?:his|her) neck|snapped bones and serious bleeding from the neck|no apparent injuries|minor bruises on (?:his|her) neck|minor (?:bruises|lacerations) about the head|minor cuts and bruises on (?:his|her) (?:chest|back|abdominal area)|severe head trauma and bleeding from the ears|strange case of muscle twitching|case of (?:sporadic|uncontrollable) convulsions/)
+end
+
+

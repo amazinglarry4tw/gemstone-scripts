@@ -1,0 +1,39 @@
+@started = Time.now
+@last = nil
+
+def format_time(timeElapsed)
+	@timeElapsed = timeElapsed
+	
+	seconds = @timeElapsed % 60
+	minutes = (@timeElapsed / 60) % 60
+	hours = (@timeElapsed/3600)
+	
+	result = hours.to_s + ":" + format("%02d",minutes.to_s) + ":" + format("%02d",seconds.to_s)
+	return result
+end
+
+while true
+	line = get until line.strip =~ /checktime/
+	
+	if line =~/checktime/
+		if @last == nil
+			@last = Time.now
+			time = @last - @started
+			since_started = format_time(time.to_i)
+			echo "Time elapsed:  " + since_started.to_s
+			put "whisper ooc group We've wasted this much time: " + since_started.to_s
+		else 
+			since_last = format_time((Time.now - @last).to_i)
+			since_started = format_time((Time.now - @started).to_i)
+			
+			echo "Time elapsed:  " + since_started.to_s
+			echo "Since last check:  " + since_last.to_s
+			
+			put "whisper ooc group We've wasted this much time: " + since_started.to_s
+			
+			@last = Time.now
+		end
+		line = nil
+	end
+	sleep(1)
+end

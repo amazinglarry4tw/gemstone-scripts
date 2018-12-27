@@ -1,0 +1,17 @@
+pause_script "bigshot"
+before_dying { unpause_script "bigshot" }
+
+start_script "sloot2", [ "sell" ]
+
+wait_while { running? "sloot2" }
+
+playStyles = ["Joyful", "Mournful", "Soft", "Fast", "Slow", "Intense", "Jaunty", "Flamboyant", "Aimless", "Somber", "Inspiring"]
+randomIndex = rand(playStyles.size)
+chosenStyle = playStyles[randomIndex]
+
+put "go table"
+put "stow all"
+put "take flute"
+put "play flute " + chosenStyle
+
+unpause_script "bigshot"

@@ -1,0 +1,35 @@
+@target = variable[1]
+say = ["Joyful", "Soft", "Excite", "Sage", "Wounded", "Fierce"]
+randomIndex = rand(say.size)
+chosenStyle = say[randomIndex]
+
+#This method will take the TONE and then the MESSAGE to speak to someone.
+def say(tone, message)
+	put "say :#{tone} ::#{@target} #{message}"
+end
+
+#This method takes the action you want to emote in game.
+def emote(action)
+	put "#{action}"
+end
+
+case chosenStyle
+	when "Joyful"
+		say("cheerful", "Anything for you friend!")
+		emote("smile")
+	when "Soft"
+		say("soft", "Of course!  Anytime, friend!")
+		emote("cheer")
+	when "Excite"
+		say("excite", "You're welcome, friend!")
+	when "Sage"
+		say("sage", "That's what I am for friend... you're welcome!")
+		emote("nod understanding")
+	when "Wounded"
+		say("wounded", "No worries, friend... your wounds are my wounds!")
+		emote("moan")
+	when "Fierce"
+		say("fierce", "Your wounds will no longer trouble you, friend!")
+		emote("raise fist")
+end
+

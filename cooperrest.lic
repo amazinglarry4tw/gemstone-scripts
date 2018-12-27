@@ -1,0 +1,3 @@
+Script.run('go2', 'nexus')
+fput 'nudge Sleepy'
+fput 'nudge Quahadr'

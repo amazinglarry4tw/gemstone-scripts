@@ -1,0 +1,70 @@
+room = Room.current
+
+check_health = proc{
+  echo 'I am supposed to be checking my health.'
+  if checkhealth < 60
+    echo 'I am below 60 hit points.'
+  elsif checkhealth == 132
+    echo 'I am at full health, which is ' + checkhealth.to_s
+  else
+    echo 'I am not below my threshold, but I am not in danger at ' + checkhealth.to_s + ' hit points.'
+  end
+}
+check_health.call
+
+display_health_info = proc{
+  echo 'My health is at ' + checkhealth.to_s
+  echo 'My max health is ' + maxhealth.to_s
+  echo 'My health is at ' + percenthealth.to_s + ' percent.'
+}
+
+display_spirit_info = proc{
+  echo 'My spirit is at ' + checkspirit.to_s
+  echo 'My max spirit is ' + maxspirit.to_s
+  echo 'My spirit is at ' + percentspirit.to_s + ' percent.'
+}
+
+display_stamina_info = proc{
+  echo 'My stamina is at ' + checkstamina.to_s
+  echo 'My max stamina is ' + maxstamina.to_s
+  echo 'My stamina is at ' + percentstamina.to_s + ' percent.'
+}
+
+display_current_stance = proc{
+  echo 'I am currently in ' + checkstance + ' stance.'
+  echo 'I am at'
+}
+
+familiar_active = proc{
+  if Spell[920].active?
+    echo 'You have a familiar somewhere.'
+  else
+    echo 'No familiar present.'
+  end
+}
+
+check_familiar = proc{
+  if checknpcs('green-eyed tabby cat')
+    echo 'Your kitten is in the room!'
+  else
+    echo 'No kitten in the room :('
+  end
+}
+
+watch_for_familiar = proc{
+  check_familiar.call
+  wait_uintil
+
+}
+
+
+# Display some sandbox method variables.
+=begin
+display_health_info.call
+display_spirit_info.call
+display_stamina_info.call
+display_current_stance.call
+=end
+
+check_familiar.call
+familiar_active.call

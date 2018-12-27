@@ -1,0 +1,24 @@
+def wait(length=1)
+	sleep(rand(1..length))
+end		
+
+while (line = get)
+
+	if (line.downcase.include? "speaking" && "to you")
+		if line.downcase.include? "thank"			
+			if line.split[3] == "you," 
+				echo "They're speaking like doofs."
+				target = line.split[4]
+			elsif line.split[2] == "you,"
+				echo "They're speaking normally to you."
+				target = line.split[3]
+			end
+			
+			wait(3) #Wait between 1 & 3 seconds nefore responding to someone.
+			if (checkpcs target)
+				echo target + " is my target."
+				start_script('wordplay', [target])
+			end
+		end
+	end
+end

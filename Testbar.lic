@@ -1,0 +1,42 @@
+puts("<closeDialog id='Creatures'/><openDialog type='dynamic' id='Creatures' title='Creatures' target='Creatures' location='main' height='150' resident='true'><dialogData id='Creatures'></dialogData></openDialog>")
+
+current_npcs = GameObj.npcs
+update = true
+
+render = proc {
+	finalstring = "<dialogData id='Creatures' clear='t'>"
+	finalstring += "<label id = 'title', value = 'Creatures In Room', justify='1' anchor_top='top' top='0' left='1' width='189'/>"
+	previous_id = nil
+	label_id = 0
+	
+	GameObj.npcs.each do |name| 
+		label_id += 1
+		if previous_id == nil 
+			finalstring += "<label id = '#{label_id}', value = '#{name.name}', justify='4' anchor_top='title' top='0' left='1' height='nil' width='nil'/>"
+			previous_id = label_id
+		else
+			finalstring += "<label id = '#{label_id}', value = '#{name.name}', justify='4' anchor_top='#{previous_id}' top='0' left='1' height='nil' width='nil'/>"
+			previous_id = label_id
+
+		end
+	end	
+	finalstring += "</dialogData>"
+	puts(finalstring)
+}
+
+update_npcs = proc {
+updated_npcs = GameObj.npcs
+
+	if (current_npcs == updated_npcs)
+		respond "No changes."
+	else
+		respond "There were changes!  Updating the list."
+		current_npcs = updated_npcs
+		render.call
+	end
+}
+
+loop {	
+	update_npcs.call
+	sleep 1
+}

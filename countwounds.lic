@@ -1,0 +1,1 @@
+echo XMLData.injuries.any?{|key,value| value["wound"] >= 1}

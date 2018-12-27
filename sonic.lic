@@ -1,0 +1,22 @@
+echo "Sonic Starting."
+
+def get_sonic_shit
+	if Spell[1012].active? == false
+		waitcastrt?
+		sleep(1)
+		fput "prep 1012"
+		fput "sing lance"
+	else
+		echo Spell[1012].active?.to_s
+	end
+
+	if !Spell[1014].active?
+		sleep(4)
+		fput "prep 1014"
+		fput "sing 12"
+	end
+end
+
+get_sonic_shit
+
+echo "Sonic Ended."

@@ -1,0 +1,31 @@
+=begin
+
+A simple script to keep your familiar
+alive and active.
+
+Waits for the link to weaken and then
+refreshs 920.
+
+Shouldn't damage your nerves
+
+~Annelie
+(tweaks by sele)
+
+=end
+
+no_pause_all
+no_kill_all
+hide_me
+
+#Watchfor.new ("You sense the link between you and"){wait_until {checkmana(5)};fput "incant 920"}
+loop{
+wait_while {Spell[920].timeleft >= 3}
+	pause_script("waggle") if running?("waggle")
+	wait_until { checkmana(5)}
+		waitcastrt?
+		waitrt?
+		Spell[920].cast
+		pause "4s"
+	unpause_script("waggle") if running?("waggle")
+}
+
