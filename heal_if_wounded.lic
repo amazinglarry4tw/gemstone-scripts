@@ -1,0 +1,10 @@
+if (XMLData.injuries.any?{|key,value| value["wound"] >= 1})
+	start_script('useherb')
+	until ( !running? "useherb" ) 
+		pause 3
+	end
+else
+	echo "Healing not necessary."
+end
+
+

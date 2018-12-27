@@ -2,6 +2,7 @@
 alias.lic
 answers.lic
 arenatimer.lic
+arenawatch.lic
 armor.lic
 autostart.lic
 bandit.lic
@@ -36,6 +37,7 @@ findtable.lic
 foreach.lic
 ForgeMaster.lic
 friendList.lic
+GameObjAdd
 GameObjAddMore.lic
 gameobj-data.xml
 go2.lic
@@ -90,6 +92,7 @@ take.rb
 tdig.lic
 tdusk.lic
 test_index.lic
+testtable.lic
 test1.lic
 Testbar.lic
 testheal.lic
