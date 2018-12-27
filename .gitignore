@@ -10,7 +10,7 @@ bigshot.lic
 briefcombat.lic
 bundleall.lic
 buyallherbs.lic
-champion_check*
+champion_check
 child2.lic
 cooperrest.lic
 countwounds.lic
@@ -25,7 +25,7 @@ drop.rb
 DSD.lic
 duskruin_watch.lic
 ego2.lic
-enchantenotes.csv
+enchantnotes.csv
 enchantnotes.lic
 exit.lic
 famgo2.lic
@@ -118,5 +118,10 @@ whereami2.lic
 whisperheal.lic
 wood.lic
 wordplay.lic
+<<<<<<< HEAD
 ego2.lic
 GameObjAddMore.lic
+=======
+*.txt
+*.rb
+>>>>>>> f33c3476b31f9cb99cf68002589797062c67fbdb

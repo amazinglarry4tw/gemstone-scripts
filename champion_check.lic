@@ -1,0 +1,18 @@
+loop {
+	if (GameObj.npcs.size >= 0)
+		champion_spotted = false
+
+		GameObj.npcs.each do |npc|
+			if (npc.noun.include?("champion"))
+				champion_spotted = true
+			end
+		end
+		
+		# If a champion has been spotted.  Incant 717.
+		if (champion_spotted)
+			put "incant 717"
+		end
+	end
+	
+	sleep 1
+}
