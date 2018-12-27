@@ -1,2 +1,0 @@
-msg = matchtimeout 2, "You head over to the", "It seems as though all the tables here are occupied."
-echo msg
