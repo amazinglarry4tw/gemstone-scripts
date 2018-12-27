@@ -1,7 +1,0 @@
-loop {
-	if (GameObj.npcs.size >= 0 && GameObj.npcs.includes? 'squirrel')
-		echo "There's a squirrel in the room!"
-	end
-	
-	sleep 1
-}
